@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-#include <math.h>
-#include <allegro5/allegro_color.h>
-#include "allegro5/allegro5.h"
-#include <allegro5/allegro_primitives.h>
+
+#include "snowflake.h"
 
 #define LADOS 3 
 #define GRADOS_A_RADIANES(x) (x * M_PI / 180.0)
-#define CASO_BASE 0
+#define CASO_BASE 1
 
 void get_destination(int px, int py, double largo, double angulo, int* pfx, int* pfy );
 //Funcion que recibe un punto inicial, un largo, un angulo y un puntero
@@ -18,26 +16,19 @@ void get_destination(int px, int py, double largo, double angulo, int* pfx, int*
 //al angulo y a la distancia 'largo' del punto incial. ecibe el angulo en grados
 //y lo interpreta en sentido antihorario.
 
-void create_koch_snowflake(int order, double length, int px, int py);
-//funcion que recibe el orden del fractal, en que coordenadas se lo desea crear.
-//dibuja un fractal de dicho orden en pantalla con un delay apreciable entre
-//cada iteracion.
-
-al_get_allegro_color_version();
 void create_koch_snowflake(int n, double length, int px, int py)
 {
     int i;
     int pfx,pfy;
     int pix=px;
     int piy=py;
-    get_destination(px, py, length/3.0 , double 60.0, &pfx, &pfy ); //roto la orientacion 60 grados antihorario.
+    get_destination(px, py, length/3.0 , 60.0, &pfx, &pfy ); //roto la orientacion 60 grados antihorario.
     
-    for(i=0; i<LADOS; i++) //hago un ciclo por lado del fractal de orden 1.
-    {
+    
         if(n==CASO_BASE) //dibujo el primer tercio del lado del fractal de orden 1
         {
-            al_draw_line((float)pix, (float)piy, (float) pfx,(float) pfy, al_map_rgb(255, 255, 255));
-            pix= pfx
+            al_draw_line((float)pix, (float)piy, (float) pfx,(float) pfy, al_map_rgb(255, 255, 255), 1);
+            pix= pfx;
             piy=pfy;
         }
         else
@@ -48,8 +39,8 @@ void create_koch_snowflake(int n, double length, int px, int py)
         if(n==CASO_BASE) //roto 60 grados antihorario y dibujo el primer lado del triangulo
         {
             
-            get_destination(pix, piy, length/3.0 , double 60.0, &pfx, &pfy );
-            al_draw_line((float)px, (float)py, (float) pfx,(float) pfy, al_map_rgb(255, 255, 255));
+            get_destination(pix, piy, length/3.0 , 60.0, &pfx, &pfy );
+            al_draw_line((float)px, (float)py, (float) pfx,(float) pfy, al_map_rgb(255, 255, 255), 1);
             pix=pfx;
             piy=pfy;
             
@@ -63,8 +54,8 @@ void create_koch_snowflake(int n, double length, int px, int py)
         
         if(n==CASO_BASE)
         {
-            get_destination(pix, piy, length/3.0, double 240.0, &pfx, &pfy );
-            al_draw_line((float)pix, (float)piy, (float) pfx,(float) pfy, al_map_rgb(255, 255, 255));
+            get_destination(pix, piy, length/3.0, 240.0, &pfx, &pfy );
+            al_draw_line((float)pix, (float)piy, (float) pfx,(float) pfy, al_map_rgb(255, 255, 255), 1);
             pix=pfx;
             piy=pfy;
         }
@@ -76,8 +67,8 @@ void create_koch_snowflake(int n, double length, int px, int py)
 
         if(n==CASO_BASE)
         {
-            get_destination(pix, piy, length/3.0, double 60.0, &pfx, &pfy );
-            al_draw_line((float)pix, (float)piy, (float) pfx,(float) pfy, al_map_rgb(255, 255, 255));
+            get_destination(pix, piy, length/3.0, 60.0, &pfx, &pfy );
+            al_draw_line((float)pix, (float)piy, (float) pfx,(float) pfy, al_map_rgb(255, 255, 255), 1);
             pix=pfx;
             piy=pfy;
         }
@@ -86,10 +77,9 @@ void create_koch_snowflake(int n, double length, int px, int py)
             create_koch_snowflake(n-1, length/3.0,pfx, pfy);
         }
 
-        get_destination(pix, piy, length/3.0 , double 240.0, &pfx, &pfy ); //roto 240 grados
-    }
+        get_destination(pix, piy, length/3.0 , 240.0, &pfx, &pfy ); //roto 240 grados
     
-     
+    
     
     
 }
