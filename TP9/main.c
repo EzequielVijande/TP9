@@ -94,15 +94,15 @@ int main(int argc, char** argv)
         bool salir = false;
         int next_startx, next_starty;
         
-        create_koch_snowflake(6, 300, START_POINTX, START_POINTY, 60.0); //crea un lado del fractal
+        create_koch_snowflake(7, 300, START_POINTX, START_POINTY, 60.0); //crea un lado del fractal
         
         get_destination(START_POINTX, START_POINTY, 300 , 60.0, &next_startx, &next_starty );
         
-        create_koch_snowflake(6, 300, next_startx, next_starty, 300); //crea un lado del fractal
+        create_koch_snowflake(7, 300, next_startx, next_starty, 300); //crea un lado del fractal
         
         get_destination(next_startx, next_starty, 300 , 300, &next_startx, &next_starty );
         
-        create_koch_snowflake(6, 300, next_startx, next_starty, 180); //crea un lado del fractal
+        create_koch_snowflake(7, 300, next_startx, next_starty, 180); //crea un lado del fractal
         
         
         
