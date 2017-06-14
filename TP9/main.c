@@ -20,7 +20,8 @@
 #include "snowflake.h"
 
 #define TERMINAR ALLEGRO_KEY_ESCAPE 
-
+#define START_POINTX 400
+#define START_POINTY 400
 /*
  * 
  */
@@ -91,8 +92,23 @@ int main(int argc, char** argv)
 	al_register_event_source(event_queue, al_get_keyboard_event_source()); 
         
         bool salir = false;
+        int next_startx, next_starty;
         
-        create_koch_snowflake(4, 300, 400, 400, 60.0); //crea el fractal
+        create_koch_snowflake(6, 300, START_POINTX, START_POINTY, 60.0); //crea un lado del fractal
+        
+        get_destination(START_POINTX, START_POINTY, 300 , 60.0, &next_startx, &next_starty );
+        
+        create_koch_snowflake(6, 300, next_startx, next_starty, 300); //crea un lado del fractal
+        
+        get_destination(next_startx, next_starty, 300 , 300, &next_startx, &next_starty );
+        
+        create_koch_snowflake(6, 300, next_startx, next_starty, 180); //crea un lado del fractal
+        
+        
+        
+        
+        
+        
         al_flip_display();
         
         while(!salir)

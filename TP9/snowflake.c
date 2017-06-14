@@ -10,11 +10,7 @@
 #define GRADOS_A_RADIANES(x) (x * M_PI / 180.0)
 #define CASO_BASE 1
 
-void get_destination(int px, int py, double largo, double angulo, int* pfx, int* pfy );
-//Funcion que recibe un punto inicial, un largo, un angulo y un puntero
-//al punto final. La funcion devuelve las coordenadass del punto que se encuentra
-//al angulo y a la distancia 'largo' del punto incial. ecibe el angulo en grados
-//y lo interpreta en sentido antihorario.
+
 
 void create_koch_snowflake(int n, double length, int px, int py, double angulo)
 {

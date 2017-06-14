@@ -24,6 +24,12 @@ void create_koch_snowflake(int order, double length, int px, int py, double angu
 //dibuja un fractal de dicho orden en pantalla con un delay apreciable entre
 //cada iteracion.
 
+void get_destination(int px, int py, double largo, double angulo, int* pfx, int* pfy );
+//Funcion que recibe un punto inicial, un largo, un angulo y un puntero
+//al punto final. La funcion devuelve las coordenadass del punto que se encuentra
+//al angulo y a la distancia 'largo' del punto incial. ecibe el angulo en grados
+//y lo interpreta en sentido antihorario.
+
 
 
 
