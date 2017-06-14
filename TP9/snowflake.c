@@ -34,7 +34,7 @@ void create_koch_snowflake(int n, double length, int px, int py, double angulo)
         }
         else
         {
-            create_koch_snowflake(n-1, length/3.0, px, py, 0);
+            create_koch_snowflake(n-1, length/3.0, px, py, 0+angulo);
         }
     
         pix= pfx;
@@ -50,7 +50,7 @@ void create_koch_snowflake(int n, double length, int px, int py, double angulo)
         }
         else
         {
-            create_koch_snowflake(n-1, length/3.0, pix, piy, 60);
+            create_koch_snowflake(n-1, length/3.0, pix, piy, 60+angulo);
         }
 
         //roto 240 grados en sentido antihorario y dibujo el fractal en el siguiente lado
@@ -64,7 +64,7 @@ void create_koch_snowflake(int n, double length, int px, int py, double angulo)
         }
         else
         {
-            create_koch_snowflake(n-1, length/3.0, pix, piy, 300);
+            create_koch_snowflake(n-1, length/3.0, pix, piy, 300+angulo);
         }
         pix=pfx;
         piy=pfy;
@@ -78,7 +78,7 @@ void create_koch_snowflake(int n, double length, int px, int py, double angulo)
         }
         else
         {
-            create_koch_snowflake(n-1, length/3.0,pix, piy, 0);
+            create_koch_snowflake(n-1, length/3.0,pix, piy, 0+angulo);
         }
 
     

@@ -92,7 +92,7 @@ int main(int argc, char** argv)
         
         bool salir = false;
         
-        create_koch_snowflake(1, 300, 400, 400, 60.0); //crea el fractal
+        create_koch_snowflake(4, 300, 400, 400, 60.0); //crea el fractal
         al_flip_display();
         
         while(!salir)
