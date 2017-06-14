@@ -19,7 +19,7 @@
 #include "allegro5/allegro5.h"
 #include <allegro5/allegro_primitives.h>
 
-void create_koch_snowflake(int order, double length, int px, int py);
+void create_koch_snowflake(int order, double length, int px, int py, double angulo);
 //funcion que recibe el orden del fractal, en que coordenadas se lo desea crear.
 //dibuja un fractal de dicho orden en pantalla con un delay apreciable entre
 //cada iteracion.
