@@ -20,9 +20,7 @@
 #include "snowflake.h"
 
 #define TERMINAR ALLEGRO_KEY_ESCAPE 
-#define START_POINTX 400
-#define START_POINTY 400
-#define ORDER 9
+
 /*
  * 
  */
@@ -94,9 +92,7 @@ int main(int argc, char** argv)
         
         bool salir = false;
         
-        
-        
-         final_snowflake(ORDER, START_POINTX, START_POINTY);
+        final_snowflake(14);
         
         
         

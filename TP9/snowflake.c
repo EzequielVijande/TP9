@@ -9,20 +9,42 @@
 #define LADOS 3 
 #define GRADOS_A_RADIANES(x) (x * M_PI / 180.0)
 #define CASO_BASE 1
+#define TOLERANCIA 1
+#define LENGTH 400
+#define START_POINTX 400
+#define START_POINTY 400
 
 
+void create_koch_snowflake(int order, double length, double px, double py, double angulo);
+//funcion que recibe el orden del fractal, en que coordenadas se lo desea crear.
+//dibuja un fractal de dicho orden en pantalla con un delay apreciable entre
+//cada iteracion.
 
-void create_koch_snowflake(int n, double length, int px, int py, double angulo)
+void get_destination(double px, double py, double largo, double angulo, double* pfx, double* pfy );
+//Funcion que recibe un punto inicial, un largo, un angulo y un puntero
+//al punto final. La funcion devuelve las coordenadass del punto que se encuentra
+//al angulo y a la distancia 'largo' del punto incial. ecibe el angulo en grados
+//y lo interpreta en sentido antihorario.
+
+void final_snowflake(int n);
+//Funcion que crea el snowflake entero, recibe el orden
+//del snowflake a crear.
+
+void create_koch_snowflake(int n, double length, double px, double py, double angulo)
 {
     int i;
-    int pfx= px+(length/3.0);
-    int pfy= py;
-    int pix=px;
-    int piy=py;
+    double pfx= px+(length/3.0);
+    double pfy= py;
+    double pix=px;
+    double piy=py;
+    int order= n;
     get_destination(pix, piy, length/3.0 , angulo, &pfx, &pfy );
     
-    
-        if(n==CASO_BASE) //dibujo el primer tercio del lado del fractal de orden 1
+    if((3*length)<= TOLERANCIA)
+    {
+        order=1;
+    }
+        if(order==CASO_BASE) //dibujo el primer tercio del lado del fractal de orden 1
         {
             
             al_draw_line((float)pix, (float)piy, (float) pfx,(float) pfy, al_map_rgb(255, 255, 255), 1);
@@ -30,14 +52,14 @@ void create_koch_snowflake(int n, double length, int px, int py, double angulo)
         }
         else
         {
-            create_koch_snowflake(n-1, length/3.0, px, py, 0+angulo);
+            create_koch_snowflake(order-1, length/3.0, px, py, 0+angulo);
         }
     
         pix= pfx;
         piy=pfy;
         get_destination(pix, piy, length/3.0 , 60.0+angulo, &pfx, &pfy );
 
-        if(n==CASO_BASE) //roto 60 grados antihorario y dibujo el primer lado del triangulo
+        if(order==CASO_BASE) //roto 60 grados antihorario y dibujo el primer lado del triangulo
         {
             
             al_draw_line((float)pix, (float)piy, (float) pfx,(float) pfy, al_map_rgb(255, 255, 255), 1);
@@ -46,26 +68,26 @@ void create_koch_snowflake(int n, double length, int px, int py, double angulo)
         }
         else
         {
-            create_koch_snowflake(n-1, length/3.0, pix, piy, 60+angulo);
+            create_koch_snowflake(order-1, length/3.0, pix, piy, 60+angulo);
         }
 
         //roto 240 grados en sentido antihorario y dibujo el fractal en el siguiente lado
         pix=pfx;
         piy=pfy;
         get_destination(pix, piy, length/3.0, 300+angulo, &pfx, &pfy );
-        if(n==CASO_BASE)
+        if(order==CASO_BASE)
         {
             al_draw_line((float)pix, (float)piy, (float) pfx,(float) pfy, al_map_rgb(255, 255, 255), 1);
             
         }
         else
         {
-            create_koch_snowflake(n-1, length/3.0, pix, piy, 300+angulo);
+            create_koch_snowflake(order-1, length/3.0, pix, piy, 300+angulo);
         }
         pix=pfx;
         piy=pfy;
         get_destination(pix, piy, length/3.0, 0+angulo, &pfx, &pfy );
-        if(n==CASO_BASE)
+        if(order==CASO_BASE)
         {
             
             al_draw_line((float)pix, (float)piy, (float) pfx,(float) pfy, al_map_rgb(255, 255, 255), 1);
@@ -74,7 +96,7 @@ void create_koch_snowflake(int n, double length, int px, int py, double angulo)
         }
         else
         {
-            create_koch_snowflake(n-1, length/3.0,pix, piy, 0+angulo);
+            create_koch_snowflake(order-1, length/3.0,pix, piy, 0+angulo);
         }
 
     
@@ -82,9 +104,25 @@ void create_koch_snowflake(int n, double length, int px, int py, double angulo)
     
 }
 
-void get_destination(int px, int py, double largo, double angulo, int* pfx, int* pfy )
+void final_snowflake(int n) 
+{
+    double next_startx, next_starty;
+        
+         create_koch_snowflake(n, LENGTH, START_POINTX, START_POINTY, 60.0); //crea un lado del fractal
+        
+        get_destination(START_POINTX, START_POINTY, 400 , 60.0, &next_startx, &next_starty );
+        
+        create_koch_snowflake(n, LENGTH, next_startx, next_starty, 300); //crea un lado del fractal
+        
+        get_destination(next_startx, next_starty, 400 , 300, &next_startx, &next_starty );
+        
+        create_koch_snowflake(n, LENGTH, next_startx, next_starty, 180); //crea un lado del fractal
+        
+}
+
+void get_destination(double px, double py, double largo, double angulo, double* pfx, double* pfy )
 {
     double angulo_radianes = (GRADOS_A_RADIANES(angulo));
-    *pfx= (int) (px+(largo*(cos(angulo_radianes)))); //calculo la cordeenada en x del destino
-    *pfy= (int) (py-(largo*(sin(angulo_radianes)))); //calculo la coordenada en y del destino
+    *pfx=  px+(largo*(cos(angulo_radianes))); //calculo la cordeenada en x del destino
+    *pfy= py-(largo*(sin(angulo_radianes))); //calculo la coordenada en y del destino
 }
