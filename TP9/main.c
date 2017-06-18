@@ -18,6 +18,13 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 #include "snowflake.h"
+#include "input.h"
+#include <time.h>
+
+#define ARGUMENTOS 5
+#define ORDEN 1
+#define TOLERANCIA 2
+#define COLOR 3
 
 #define TERMINAR ALLEGRO_KEY_ESCAPE 
 
@@ -28,6 +35,33 @@ int main(int argc, char** argv)
 {
     ALLEGRO_EVENT_QUEUE * event_queue = NULL;
     ALLEGRO_DISPLAY *  display = NULL;
+    
+    if(argc<ARGUMENTOS)
+    {
+        fprintf(stderr,"Argumentos insuficientes, por favor introducir en el siguiente orden:\n");
+        fprintf(stderr,"1) Orden\n2) Tolerancia\n3) Color ('r','g','b')\n");
+        fprintf(stderr,"4) Report (nombre del archivo a hacer el informe)\n");
+        return -1;
+    }
+    
+    if(!validate_input(argv[ORDEN])) //valida si se ingreso correctamente el orden
+    {
+        fprintf(stderr,"Orden invalido, por favor introducir un numero natural o el 0\n");
+        return -1;
+        
+    }
+    if((!validate_input(argv[TOLERANCIA]))||(!convert_char(argv[TOLERANCIA]))) //valida si se ingeso correctamente la tolerancia
+    {
+        fprintf(stderr,"Tolerancia invalida, por favor introducir un numero natural\n");
+        return -1;
+    }
+    
+    if(!a_color(argv[COLOR]))
+    {
+        fprintf(stderr,"Color invalido, por favor introducir 'r', 'g', o 'b'\n");
+        return -1;
+    }
+    
     
     if(!al_init())
         {
@@ -92,11 +126,24 @@ int main(int argc, char** argv)
         
         bool salir = false;
         
-        final_snowflake(14);
+        int order= convert_char (argv[ORDEN]);
+        char color= *(argv[COLOR]);
+        int tolerancia = convert_char(argv[TOLERANCIA]);
+        int i;
+        int max= calcular_orden_maximo(tolerancia); //calcula hasta que orden se puede llegar
+                                                        //con la tolerancia dada
+        
+        for(i=0; (i<= order)&&(i<=max); i++)
+        {
+            final_snowflake(i, tolerancia); //crea el fractal
+             al_flip_display();
+             sleep(1);
+        }
         
         
         
-        al_flip_display();
+        
+        
         
         while(!salir)
 	{

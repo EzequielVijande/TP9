@@ -19,10 +19,13 @@
 #include "allegro5/allegro5.h"
 #include <allegro5/allegro_primitives.h>
 
-void final_snowflake(int n);
+void final_snowflake(int n, int tolerancia);
 //Funcion que crea el snowflake entero, recibe el orden
 //del snowflake a crear.
 
+int calcular_orden_maximo(int tolerancia);
+//Calcula cual es el el orden maximo al que se puede llegar
+//respetando la tolerancia.
 
 
 
