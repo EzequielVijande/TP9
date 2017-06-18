@@ -21,12 +21,22 @@
 #include "input.h"
 #include <time.h>
 
+//COLORES
+#define ROJO 'r'
+#define AZUL 'b'
+#define VERDE 'g'
+
+
+
 #define ARGUMENTOS 5
 #define ORDEN 1
 #define TOLERANCIA 2
 #define COLOR 3
 
 #define TERMINAR ALLEGRO_KEY_ESCAPE 
+
+char * look_up_color(char);
+//Funcion que interpreta el color que se ingreso como parametro.
 
 /*
  * 
@@ -127,7 +137,7 @@ int main(int argc, char** argv)
         bool salir = false;
         
         int order= convert_char (argv[ORDEN]);
-        char color= *(argv[COLOR]);
+        char * color= look_up_color(*(argv[COLOR]));
         int tolerancia = convert_char(argv[TOLERANCIA]);
         int i;
         int max= calcular_orden_maximo(tolerancia); //calcula hasta que orden se puede llegar
@@ -135,7 +145,7 @@ int main(int argc, char** argv)
         
         for(i=0; (i<= order)&&(i<=max); i++)
         {
-            final_snowflake(i, tolerancia); //crea el fractal
+            final_snowflake(i, tolerancia, color); //crea el fractal
              al_flip_display();
              sleep(1);
         }
@@ -166,3 +176,23 @@ int main(int argc, char** argv)
         
    
 
+char * look_up_color(char color)
+{
+    char * a_color=NULL;
+    switch(color)
+    {
+        case ROJO:
+            a_color = "red";
+            break;
+        
+        case AZUL:
+            a_color = "blue";
+            break;
+            
+        case VERDE:
+            a_color = "green";
+            break;
+    }
+    
+    return a_color;
+}

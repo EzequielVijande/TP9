@@ -19,7 +19,7 @@
 #include "allegro5/allegro5.h"
 #include <allegro5/allegro_primitives.h>
 
-void final_snowflake(int n, int tolerancia);
+void final_snowflake(int n, int tolerancia, char* color);
 //Funcion que crea el snowflake entero, recibe el orden
 //del snowflake a crear.
 
