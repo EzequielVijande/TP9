@@ -106,6 +106,18 @@ void create_koch_snowflake(int n, double length, double px, double py, double an
 void final_snowflake(int n, int tolerancia, char* color) 
 {
     double next_startx, next_starty;
+    double trianglev2x, trianglev2y, trianglev3x, trianglev3y; //vertices del fractal de orden 0
+    
+    if(n==0) //trata el orden 0 como caso aparte
+    {
+        get_destination(START_POINTX-OFFSET, START_POINTY+OFFSET/2.0, LENGTH, 60.0, &trianglev2x, &trianglev2y ); //calculo ambos
+        get_destination(START_POINTX-OFFSET, START_POINTY+OFFSET/2.0, LENGTH, 0.0, &trianglev3x, &trianglev3y ); //vertices
+        
+        al_draw_triangle(START_POINTX-OFFSET, START_POINTY+OFFSET/2.0, (float) trianglev2x, (float) trianglev2y, (float) trianglev3x, (float) trianglev3y, al_color_name(color), 1);
+    }
+    
+    else
+    {
         
          create_koch_snowflake(n, LENGTH*2*n, START_POINTX-(2*n*OFFSET), START_POINTY+((n)*OFFSET), 60.0, tolerancia, color); //crea un lado del fractal
         
@@ -116,6 +128,7 @@ void final_snowflake(int n, int tolerancia, char* color)
         get_destination(next_startx, next_starty, LENGTH*2*n , 300, &next_startx, &next_starty );
         
         create_koch_snowflake(n, LENGTH*2*n, next_startx, next_starty, 180, tolerancia, color); //crea un lado del fractal
+    }
         
 }
 
