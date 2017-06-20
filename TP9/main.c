@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,10 +22,8 @@
 #include "input.h"
 #include <time.h>
 
-//COLORES
-#define ROJO 'r'
-#define AZUL 'b'
-#define VERDE 'g'
+
+
 
 
 
@@ -49,7 +48,7 @@ int main(int argc, char** argv)
     if(argc<ARGUMENTOS)
     {
         fprintf(stderr,"Argumentos insuficientes, por favor introducir en el siguiente orden:\n");
-        fprintf(stderr,"1) Orden\n2) Tolerancia\n3) Color ('r','g','b')\n");
+        fprintf(stderr,"1) Orden\n2) Tolerancia\n3) Color ('r','g','b','p','w')\n");
         fprintf(stderr,"4) Report (nombre del archivo a hacer el informe)\n");
         return -1;
     }
@@ -68,7 +67,7 @@ int main(int argc, char** argv)
     
     if(!a_color(argv[COLOR]))
     {
-        fprintf(stderr,"Color invalido, por favor introducir 'r', 'g', o 'b'\n");
+        fprintf(stderr,"Color invalido, por favor introducir 'r','g','b','w','p'\n");
         return -1;
     }
     
@@ -191,6 +190,14 @@ char * look_up_color(char color)
             
         case VERDE:
             a_color = "green";
+            break;
+            
+        case ROSA:
+            a_color = "hotpink";
+            break;
+            
+        case BLANCO:
+            a_color = "white";
             break;
     }
     

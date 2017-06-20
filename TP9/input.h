@@ -12,6 +12,13 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+//COLORES
+#define ROJO 'r'
+#define AZUL 'b'
+#define VERDE 'g'
+#define ROSA 'p'
+#define BLANCO 'w'
+
 int convert_char (char * string);
 //recibe un numero en forma de string y devuelve su valor
 

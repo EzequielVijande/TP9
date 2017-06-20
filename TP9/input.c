@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 #include <stdbool.h>
+#include "input.h"
 #define TERMINADOR 0
 
 int convert_char (char * string)
@@ -47,7 +48,7 @@ bool a_color(char * string)
     bool valid= true;
     
     
-    if ((color!='r') && (color!='g') && (color!='b'))
+    if ((color!=ROJO) && (color!=VERDE) && (color!=AZUL)&&(color!=ROSA)&&(color!=BLANCO))
     {
         valid= false;
     }

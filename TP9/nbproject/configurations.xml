@@ -65,6 +65,7 @@
             <linkerOptionItem>`pkg-config --libs allegro_primitives-5.0`</linkerOptionItem>
             <linkerOptionItem>`pkg-config --libs allegro_ttf-5.0`</linkerOptionItem>
             <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
+            <linkerLibStdlibItem>PosixThreads</linkerLibStdlibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
