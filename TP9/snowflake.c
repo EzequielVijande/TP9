@@ -7,6 +7,7 @@
 #include "snowflake.h"
 
 #define OFFSET 40
+#define DELAY 800
 #define LADOS 3 
 #define GRADOS_A_RADIANES(x) (x * M_PI / 180.0)
 #define CASO_BASE 1
@@ -47,6 +48,8 @@ void create_koch_snowflake(int n, double length, double px, double py, double an
         {
             
             al_draw_line((float)pix, (float)piy, (float) pfx,(float) pfy,al_color_name(color), 1);
+            al_flip_display();
+            usleep(DELAY);
             
         }
         else
@@ -62,6 +65,8 @@ void create_koch_snowflake(int n, double length, double px, double py, double an
         {
             
             al_draw_line((float)pix, (float)piy, (float) pfx,(float) pfy,al_color_name(color), 1);
+            al_flip_display();
+            usleep(DELAY);
             
             
         }
@@ -77,6 +82,8 @@ void create_koch_snowflake(int n, double length, double px, double py, double an
         if(order==CASO_BASE)
         {
             al_draw_line((float)pix, (float)piy, (float) pfx,(float) pfy, al_color_name(color), 1);
+            al_flip_display();
+            usleep(DELAY);
             
         }
         else
@@ -90,6 +97,8 @@ void create_koch_snowflake(int n, double length, double px, double py, double an
         {
             
             al_draw_line((float)pix, (float)piy, (float) pfx,(float) pfy, al_color_name(color), 1);
+            al_flip_display();
+            usleep(DELAY);
             pix=pfx;
             piy=pfy;
         }

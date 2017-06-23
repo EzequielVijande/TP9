@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>calculos.h</itemPath>
       <itemPath>input.h</itemPath>
       <itemPath>snowflake.h</itemPath>
     </logicalFolder>
@@ -14,6 +15,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>calculos.c</itemPath>
       <itemPath>input.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>snowflake.c</itemPath>
@@ -69,6 +71,10 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="calculos.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="calculos.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="input.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="input.h" ex="false" tool="3" flavor2="0">
@@ -100,6 +106,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="calculos.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="calculos.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="input.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="input.h" ex="false" tool="3" flavor2="0">

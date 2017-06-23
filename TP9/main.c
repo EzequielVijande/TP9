@@ -20,8 +20,8 @@
 #include <allegro5/allegro_acodec.h>
 #include "snowflake.h"
 #include "input.h"
+#include "calculos.h"
 #include <time.h>
-
 
 
 
@@ -31,11 +31,16 @@
 #define ORDEN 1
 #define TOLERANCIA 2
 #define COLOR 3
+#define REPORTE 4
+
 
 #define TERMINAR ALLEGRO_KEY_ESCAPE 
 
 char * look_up_color(char);
 //Funcion que interpreta el color que se ingreso como parametro.
+
+int  write_report(char *,double perimetro,int orden1,int orden2,int tolerancia,double area);
+//funcion que escribe el reporte con los datos del fractal.
 
 /*
  * 
@@ -45,6 +50,7 @@ int main(int argc, char** argv)
     ALLEGRO_EVENT_QUEUE * event_queue = NULL;
     ALLEGRO_DISPLAY *  display = NULL;
     
+    
     if(argc<ARGUMENTOS)
     {
         fprintf(stderr,"Argumentos insuficientes, por favor introducir en el siguiente orden:\n");
@@ -52,6 +58,9 @@ int main(int argc, char** argv)
         fprintf(stderr,"4) Report (nombre del archivo a hacer el informe)\n");
         return -1;
     }
+    
+    
+    
     
     if(!validate_input(argv[ORDEN])) //valida si se ingreso correctamente el orden
     {
@@ -142,6 +151,10 @@ int main(int argc, char** argv)
         int max= calcular_orden_maximo(tolerancia); //calcula hasta que orden se puede llegar
                                                         //con la tolerancia dada
         
+        
+        double perimetro = perimetro_total(order, (double)LENGTH);
+        double area = area_total(order, (double)LENGTH);
+        
         for(i=0; (i<= order)&&(i<=max); i++)
         {
             final_snowflake(i, tolerancia, color); //crea el fractal
@@ -166,6 +179,11 @@ int main(int argc, char** argv)
                     }
                 }
         }
+        
+        char * nombre_reporte = argv[REPORTE];
+        
+        write_report(nombre_reporte, perimetro, order, max, tolerancia, area);
+        
         
         
         al_destroy_display(display); //cierra el display y libera la memoria del mismo.
@@ -202,4 +220,32 @@ char * look_up_color(char color)
     }
     
     return a_color;
+}
+
+
+int write_report(char * nombre_report,double perimetro,int orden1,int orden2,int tolerancia,double area)
+{
+    
+    FILE * report = fopen (nombre_report , "w");
+        if (report == NULL)
+        {
+            fprintf (stderr,"Error, no se pudo abrir el reporte, por favor intentar nuevamente.\n");
+            return -1;
+        }
+        
+        
+        
+    fprintf( report, "El orden ingresado fue %d.\n", orden1 );
+    fprintf(report, "La tolerancia ingresada fue %d y el orden en el que se excede\n", tolerancia);
+    fprintf(report,"dicha tolerancia es %d.\n", orden2);
+    fprintf(report,"El perimetro del fractal de orden mayor es %f.\n", (float)perimetro);
+    fprintf(report,"y su area es %f.", (float)area);
+        
+    fclose(report);
+    return 0;
+    
+    
+    
+    
+    
 }

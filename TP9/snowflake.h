@@ -14,6 +14,8 @@
 #ifndef SNOWFLAKE_H
 #define SNOWFLAKE_H
 
+#define LENGTH 70
+
 #include <math.h>
 #include <allegro5/allegro_color.h>
 #include "allegro5/allegro5.h"

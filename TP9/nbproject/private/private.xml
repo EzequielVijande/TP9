@@ -9,8 +9,10 @@
         <group>
             <file>file:/home/ezequiel/NetBeansProjects/TP92/TP9/input.c</file>
             <file>file:/home/ezequiel/NetBeansProjects/TP92/TP9/snowflake.c</file>
-            <file>file:/home/ezequiel/NetBeansProjects/TP92/TP9/snowflake.h</file>
+            <file>file:/home/ezequiel/NetBeansProjects/TP92/TP9/calculos.h</file>
             <file>file:/home/ezequiel/NetBeansProjects/TP92/TP9/main.c</file>
+            <file>file:/home/ezequiel/NetBeansProjects/TP92/TP9/calculos.c</file>
+            <file>file:/home/ezequiel/NetBeansProjects/TP92/TP9/input.h</file>
         </group>
     </open-files>
 </project-private>
