@@ -3,7 +3,8 @@
  * Programa que imprime en pantalla un koch snowflake de orden n en el display de Allegro.
  * Tambien crea un reporte con los datos del fractal del orden ingresado(area)
  * Recibe por linea de comandos el orden, la tolerancia, el color ('r','g','b','p',o 'w')
- * y el nombre con el que se desea que se llame el reporte a crear con los datos del fractal
+ * y el nombre con el que se desea que se llame el reporte a crear con los datos del fractal.
+ * El programa se puede finalizar tanto con la tecla "Esc" como con el boton de cierre del display
  */
 
 /* 
@@ -157,6 +158,10 @@ int main(int argc, char** argv)
                     {
                         if(ev.keyboard.keycode== TERMINAR)
                                         salir= true;
+                    }
+                    else if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                    {
+                        salir=true;
                     }
                 }
         }
