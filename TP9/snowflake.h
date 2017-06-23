@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Modulo que se encarga de crear e imprimir en pantalla el fractal.
  */
 
 /* 
@@ -14,8 +12,7 @@
 #ifndef SNOWFLAKE_H
 #define SNOWFLAKE_H
 
-#define LENGTH 70
-
+#define LENGTH 400
 #include <math.h>
 #include <allegro5/allegro_color.h>
 #include "allegro5/allegro5.h"
@@ -25,9 +22,6 @@ void final_snowflake(int n, int tolerancia, char* color);
 //Funcion que crea el snowflake entero, recibe el orden
 //del snowflake a crear.
 
-int calcular_orden_maximo(int tolerancia);
-//Calcula cual es el el orden maximo al que se puede llegar
-//respetando la tolerancia.
 
 
 

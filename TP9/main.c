@@ -1,13 +1,14 @@
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Programa que imprime en pantalla un koch snowflake de orden n en el display de Allegro.
+ * Tambien crea un reporte con los datos del fractal del orden ingresado(area)
+ * Recibe por linea de comandos el orden, la tolerancia, el color ('r','g','b','p',o 'w')
+ * y el nombre con el que se desea que se llame el reporte a crear con los datos del fractal
  */
 
 /* 
  * File:   main.c
- * Author: ezequiel
+ * Autores: Ariel Martorell, Lucas Dellisola, Ezequiel Vijande, Francisco Tolaba
  *
  * Created on June 11, 2017, 5:34 PM
  */
@@ -16,8 +17,6 @@
 #include <stdlib.h>
 #include "allegro5/allegro5.h"
 #include <allegro5/allegro_image.h>
-#include <allegro5/allegro_audio.h>
-#include <allegro5/allegro_acodec.h>
 #include "snowflake.h"
 #include "input.h"
 #include "calculos.h"
@@ -32,6 +31,7 @@
 #define TOLERANCIA 2
 #define COLOR 3
 #define REPORTE 4
+#define MIN(a,b) ( a<=b? a:b )
 
 
 #define TERMINAR ALLEGRO_KEY_ESCAPE 
@@ -96,22 +96,7 @@ int main(int argc, char** argv)
         fprintf(stderr, "failed to initialize image addon !\n");
 	return -1;
     }
-    if(!al_init_acodec_addon())
-    {
-    fprintf(stderr, "failed to initialize audio!\n");
-    return -1;
-    }
-        
-    if(!al_install_audio())
-    {
-    fprintf(stderr, "failed to initialize audio!\n");
-    return -1;
-    } 
-    if (!al_reserve_samples(1))
-    {
-        fprintf(stderr, "failed to reserve samples!\n");
-        return -1;
-    }
+    
            
             
         if(!al_install_keyboard()) 
@@ -147,20 +132,16 @@ int main(int argc, char** argv)
         int order= convert_char (argv[ORDEN]);
         char * color= look_up_color(*(argv[COLOR]));
         int tolerancia = convert_char(argv[TOLERANCIA]);
-        int i;
-        int max= calcular_orden_maximo(tolerancia); //calcula hasta que orden se puede llegar
+        int max= calcular_orden_maximo(tolerancia, (double)LENGTH); //calcula hasta que orden se puede llegar
                                                         //con la tolerancia dada
         
         
         double perimetro = perimetro_total(order, (double)LENGTH);
         double area = area_total(order, (double)LENGTH);
         
-        for(i=0; (i<= order)&&(i<=max); i++)
-        {
-            final_snowflake(i, tolerancia, color); //crea el fractal
-             al_flip_display();
-             sleep(1);
-        }
+        final_snowflake(MIN(order,max), tolerancia, color); //crea el fractal
+        
+        
         
         
         
@@ -187,7 +168,6 @@ int main(int argc, char** argv)
         
         
         al_destroy_display(display); //cierra el display y libera la memoria del mismo.
-        al_uninstall_audio();
 	return 0;
 }
         
@@ -238,7 +218,7 @@ int write_report(char * nombre_report,double perimetro,int orden1,int orden2,int
     fprintf( report, "El orden ingresado fue %d.\n", orden1 );
     fprintf(report, "La tolerancia ingresada fue %d y el orden en el que se excede\n", tolerancia);
     fprintf(report,"dicha tolerancia es %d.\n", orden2);
-    fprintf(report,"El perimetro del fractal de orden mayor es %f.\n", (float)perimetro);
+    fprintf(report,"El perimetro del fractal de orden ingresado es %f.\n", (float)perimetro);
     fprintf(report,"y su area es %f.", (float)area);
         
     fclose(report);
